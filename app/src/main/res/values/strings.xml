@@ -17,4 +17,22 @@
     <string name="obj_text_2">El transporte universitario Garzabus es de uso exclusivo para alumnos, personal académico y administrativo de la Universidad Autónoma del Estado de Hidalgo el único requisito para abordarlo es PRESENTAR CREDENCIAL O TIRA DE MATERIAS VIGENTE.</string>
     <string name="obj_text_3">Responsables de Transporte Universitario Garzabus Lic. Carlos Tovar Orellán, Administrador L.A. Cristopher Alan Avila Martínez, Subadministrador</string>
     <string name="str_btn_nav">Da Click aquí para comenzar a navegar</string>
+    <string name="str_titulo_obliga">Obligaciones dentro de la Unidad</string>
+
+
+    <string name="obligaciones_text">
+        - Los operadores del transporte son una autoridad dentro y fuera de las unidades, tienen la obligación de respetar y hacer respetar el reglamento y las disposiciones contenidas en este documento. \n\n
+
+        - Todo acto de indisciplina dentro de las unidades será sancionado, incluyendo el mal uso o maltrato de las unidades de transporte. Las credenciales de la Universidad son intransferibles y se sancionará con base en el reglamento a quien facilite o preste su credencial, así como cualquier otro mal uso de la misma.\n\n
+
+        - El usuario será el único responsable de sus objetos personales, el sistema de transporte no se hace responsable por los objetos olvidados o dañados dentro de las unidades.\n\n
+
+        - Los usuarios tienen derecho a presentar quejas y reportar anomalías en el servicio, así como a que se les informe, sobre la resolución de las mismas en un plazo responsable. Cualquier incidente que suceda dentro de las unidades deberá ser reportado en la oficina de Transporte Universitario Garzabus ubicada en Ciudad del Conocimiento carretera Pachuca- Tulancingo km. 4.5 (en el paradero).\n\n
+
+        - Se prohíbe comer o fumar dentro de las unidades.\n\n
+
+        - Queda estrictamente prohibido al usuario del servicio de transporte, introducir a la unidad materiales, armas u objetos que pongan en peligro la vida y además bebidas embriagantes.\n\n
+
+        - Queda prohibido alterar el orden y distraer al conductor durante el viaje o realizar cualquier acción que ponga en riesgo la prestación del servicio.\n\n
+    </string>
 </resources>
