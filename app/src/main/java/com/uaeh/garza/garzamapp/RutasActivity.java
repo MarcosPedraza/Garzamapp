@@ -34,6 +34,10 @@ public class RutasActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(R.string.str_nav_group_title);
+
+
+
 
         loadData();
 
@@ -48,14 +52,14 @@ public class RutasActivity extends AppCompatActivity {
     private void loadData()
     {
         img_rutas = new ArrayList<>();
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
-        img_rutas.add(new Integer(R.drawable.ceuni_img));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
+        img_rutas.add(new Integer(R.drawable.icea_ceuni));
 
     }
 

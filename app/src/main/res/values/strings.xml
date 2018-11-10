@@ -36,4 +36,5 @@
         - Queda prohibido alterar el orden y distraer al conductor durante el viaje o realizar cualquier acción que ponga en riesgo la prestación del servicio.\n\n
     </string>
     <string name="str_nav_group_title">Rutas y Horarios</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
