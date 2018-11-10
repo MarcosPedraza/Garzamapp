@@ -3,36 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
 
-    <item android:title="Communicate">
+
+    <item android:title="@string/str_nav_group_title">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_camp"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-Campestre" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_pal"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-Palmar" />
+
+            <item
+                android:id="@+id/nav_vill"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-Villas" />
+            <item
+                android:id="@+id/nav_ics"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-ICSa" />
+            <item
+                android:id="@+id/nav_icshu"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-ICSHu" />
+
+            <item
+                android:id="@+id/nav_icea_col"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-ICEA por Colosio" />
+
+            <item
+                android:id="@+id/nav_icea"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-ICEA" />
+
+            <item
+                android:id="@+id/nav_ceuni_cent"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-CEUNI-Central" />
+
+
         </menu>
     </item>
+
+
 
 </menu>

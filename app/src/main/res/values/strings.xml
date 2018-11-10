@@ -2,7 +2,7 @@
     <string name="app_name">Garzamapp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">GarzaMapp</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -11,7 +11,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="objetivos_str">Objetivos</string>
 
-    <string name="obj_text" >El objetivo principal del Trans-
+    <string name="obj_text">El objetivo principal del Trans-
         porte Universitario Garzabus es desplazar a la comunidad universitaria a las diferentes dependencias, escuelas e institutos de la UAEH, de una manera segura, cordial y eficiente con operadores calificados con buena presentación y con cordialidad a los usuarios, cumpliendo con las rutas y horarios establecidos. </string>
 
     <string name="obj_text_2">El transporte universitario Garzabus es de uso exclusivo para alumnos, personal académico y administrativo de la Universidad Autónoma del Estado de Hidalgo el único requisito para abordarlo es PRESENTAR CREDENCIAL O TIRA DE MATERIAS VIGENTE.</string>
@@ -35,4 +35,5 @@
 
         - Queda prohibido alterar el orden y distraer al conductor durante el viaje o realizar cualquier acción que ponga en riesgo la prestación del servicio.\n\n
     </string>
+    <string name="str_nav_group_title">Rutas y Horarios</string>
 </resources>
