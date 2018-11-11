@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uaeh.garza.garzamapp">
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyApB_ypogxeAa0BlTP3mX0xBn6U9LEEy94" />
-
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -28,10 +23,14 @@
         </activity>
         <activity android:name=".RutasActivity" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyApB_ypogxeAa0BlTP3mX0xBn6U9LEEy94" />
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>
