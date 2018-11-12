@@ -12,10 +12,13 @@
     <string name="objetivos_str">Objetivos</string>
 
     <string name="obj_text">El objetivo principal del Trans-
-        porte Universitario Garzabus es desplazar a la comunidad universitaria a las diferentes dependencias, escuelas e institutos de la UAEH, de una manera segura, cordial y eficiente con operadores calificados con buena presentación y con cordialidad a los usuarios, cumpliendo con las rutas y horarios establecidos. </string>
+        porte Universitario Garzabus es desplazar a la comunidad universitaria a las diferentes dependencias, escuelas e institutos de la UAEH, de una manera segura, cordial y eficiente con operadores calificados con buena presentación y con cordialidad a los usuarios, cumpliendo con las rutas y horarios establecidos.\n\n
+        El transporte universitario Garzabus es de uso exclusivo para alumnos, personal académico y administrativo de la Universidad Autónoma del Estado de Hidalgo el único requisito para abordarlo es PRESENTAR CREDENCIAL O TIRA DE MATERIAS VIGENTE. \n\n
+        Responsables de Transporte Universitario Garzabus Lic. Carlos Tovar Orellán, Administrador L.A. Cristopher Alan Avila Martínez, Subadministrador\n\n
+    </string>
 
-    <string name="obj_text_2">El transporte universitario Garzabus es de uso exclusivo para alumnos, personal académico y administrativo de la Universidad Autónoma del Estado de Hidalgo el único requisito para abordarlo es PRESENTAR CREDENCIAL O TIRA DE MATERIAS VIGENTE.</string>
-    <string name="obj_text_3">Responsables de Transporte Universitario Garzabus Lic. Carlos Tovar Orellán, Administrador L.A. Cristopher Alan Avila Martínez, Subadministrador</string>
+    <string name="obj_text_2"></string>
+    <string name="obj_text_3"></string>
     <string name="str_btn_nav">Da Click aquí para comenzar a navegar</string>
     <string name="str_titulo_obliga">Obligaciones dentro de la Unidad</string>
 
@@ -36,6 +39,8 @@
         - Queda prohibido alterar el orden y distraer al conductor durante el viaje o realizar cualquier acción que ponga en riesgo la prestación del servicio.\n\n
     </string>
     <string name="str_nav_group_title">Rutas y Horarios</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Navegar</string>
+    <string name="str_rutas_title">Transporte Universitario</string>
+
 
 </resources>

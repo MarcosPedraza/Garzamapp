@@ -99,16 +99,71 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent i = new Intent(MainActivity.this,RutasActivity.class);
 
         if (id == R.id.nav_camp) {
             // CC-campestre
-            Intent i = new Intent(MainActivity.this,RutasActivity.class);
+
+            i.putExtra("cod_ruta",1);
             startActivity(i);
 
-
+        }else if(id == R.id.nav_pal)
+        {
+            //cc_pal
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }else if(id == R.id.nav_vill)
+        {
+            //cc_villas
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }else if(id == R.id.nav_ics)
+        {
+            //cc_icsa
+            i.putExtra("cod_ruta",4);
+            startActivity(i);
+        }else if(id == R.id.nav_icshu)
+        {
+            //cc_icshu
+            i.putExtra("cod_ruta",3);
+            startActivity(i);
+        }else if(id == R.id.nav_icea_col)
+        {
+            //cc_pal
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }else if(id == R.id.nav_icea)
+        {
+            //cc_pal
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }else if(id == R.id.nav_ceuni_cent)
+        {
+            //ceuni-central
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }else if(id == R.id.nav_icea_tu)
+        {
+            //icea-tuzos
+            i.putExtra("cod_ruta",2);
+            startActivity(i);
         }
-
-
+        else if(id == R.id.nav_icea_cen)
+        {
+            //icea-central
+            i.putExtra("cod_ruta",2);
+            startActivity(i);
+        }else if(id == R.id.nav_pres_ida)
+        {
+            //presidencia -ida
+            i.putExtra("cod_ruta",5);
+            startActivity(i);
+        }else if(id == R.id.nav_cc_ceuni_plaz)
+        {
+            //CC-CEUNI-Plaza Juarez
+            i.putExtra("cod_ruta",1);
+            startActivity(i);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

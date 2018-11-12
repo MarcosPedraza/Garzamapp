@@ -43,7 +43,22 @@
                 android:id="@+id/nav_ceuni_cent"
                 android:icon="@drawable/ic_bus_blue"
                 android:title="CC-CEUNI-Central" />
-
+            <item
+                android:id="@+id/nav_icea_tu"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="ICEA-Tuzos" />
+            <item
+                android:id="@+id/nav_icea_cen"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="ICEA-Central" />
+            <item
+                android:id="@+id/nav_pres_ida"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="Presidencia M. Pachuca-IDA" />
+            <item
+                android:id="@+id/nav_cc_ceuni_plaz"
+                android:icon="@drawable/ic_bus_blue"
+                android:title="CC-CEUNI-Plaza Juárez" />
 
         </menu>
     </item>

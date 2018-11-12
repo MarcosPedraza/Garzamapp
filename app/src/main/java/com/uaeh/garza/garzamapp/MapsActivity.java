@@ -1,36 +1,65 @@
 package com.uaeh.garza.garzamapp;
 
+
+import android.content.IntentFilter;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.uaeh.garza.garzamapp.Receivers.SmsReceiver;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
 
-    private MapView mMapView;
-
+    private static  final String TAG = "MapsActivity";
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+    //Escuchador de mensaje
+    SmsReceiver receiver = new SmsReceiver();
+
+    //widgets
+    private MapView mMapView;
+    private Toolbar toolbar;
+    private ImageView img_info_m;
+    private TextView tv_info_marker;
+
+    Marker bus_pos;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        // *** IMPORTANT ***
-        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK
-        // objects or sub-Bundles.
+
+
+        toolbar = findViewById(R.id.toolbar_map);
+        img_info_m = findViewById(R.id.info_icon_marker);
+        tv_info_marker = findViewById(R.id.tv_title_marker);
+
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
@@ -39,6 +68,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMapView.onCreate(mapViewBundle);
 
         mMapView.getMapAsync(this);
+
+
+    }
+
+    //comportamiento de la flecha atras
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home)
+            finish();
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -54,40 +95,96 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMapView.onSaveInstanceState(mapViewBundle);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mMapView.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mMapView.onStop();
-    }
 
     //este metodo se ejecuta cuando el mapa esta lista
     @Override
-    public void onMapReady(GoogleMap map) {
+    public void onMapReady(final GoogleMap map) {
         map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
 
         loadPolylines(map);
 
+        setMarkers(map);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.09309534136533, -98.71148228645326), 12));
+        map.animateCamera(CameraUpdateFactory.zoomTo(12));
+        map.setOnMarkerClickListener(this);
 
+        receiver.setListener(new SmsReceiver.Listener() {
+            @Override
+            public void onTextReceived(String emisor, String text) {
+                Toast.makeText(MapsActivity.this, "Emisor: "+emisor, Toast.LENGTH_SHORT).show();
+                Log.d("contenido de mensaje",text);
+                setBusMarker(text,map);
+            }
+        });
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.09309534136571,-98.71146619319953), 13));
+    }
 
+    //evento que se dispara al dar click a un marcador
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        tv_info_marker.setText("Ruta: "+ marker.getTitle());
+        return true;
     }
 
     public void setMarkers(GoogleMap map)
     {
+
+        //ciudad del conocimiento
+        map.addMarker(new MarkerOptions().position(new LatLng(20.09309534136533, -98.71148228645326))
+                .title("Ciudad del Conocimiento")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.096445519848682, -98.71409475803377))
+                .title("CEVIDE")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.099160875085076, -98.70805978775026))
+                .title("Segunda Entrada al Fraccionamiento Villas del Álamo")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.097417813869924, -98.7051147222519))
+                .title("AV. Encino y esq. de Av. del Roble")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.096843506214125, -98.70368242263794))
+                .title("Entronque Av. del Encino y de los Avellanos")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.097810759999764, -98.70231449604036))
+                .title("De los Avellanos esq. Calle del Ébano")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.099599156210527, -98.70212674140932))
+                .title("De los Avellanos esq. Calle Lima")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.101070159754418, -98.70157957077026))
+            .title("Calle Tamarindo esq. Del Olmo")
+            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.103714908758747, -98.70448708534242))
+                .title("Av.San Miguel Azoyatla esq. Calle Margarita")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.10845519467439, -98.71047377586366))
+                .title("CEUNI")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.140928083252636, -98.80622863769533))
+                .title("ICEA")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.136163598946613, -98.81307363510133))
+                .title("ICSa_2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.122362898745056, -98.7967336177826))
+                .title("ICSHu")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+
 
 
 
@@ -471,6 +568,56 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }//acaba loadPolyline
 
+
+    public void setBusMarker(String coordenadas,GoogleMap map)
+    {
+
+        if(bus_pos != null)
+        {
+            bus_pos.remove();
+        }
+
+        String[] coord_sep = coordenadas.split(",",2);
+        Double lat = Double.valueOf(coord_sep[0]);
+        Double longt = Double.valueOf(coord_sep[1]);
+
+        LatLng pos = new LatLng(lat,longt);
+
+        bus_pos = map.addMarker(new MarkerOptions().position(pos)
+                .title("Ruta 1")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)));
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos,15.0f));
+
+      /*  map.addMarker(new MarkerOptions().position(pos)
+                .title("Ruta 1")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)));
+      */
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION);
+        registerReceiver(receiver,filter);
+        mMapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMapView.onStop();
+        unregisterReceiver(receiver);
+        Log.d(TAG, "onStop: el brodtca");
+    }
+
     @Override
     protected void onPause() {
         mMapView.onPause();
@@ -488,5 +635,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
+
 
 }
