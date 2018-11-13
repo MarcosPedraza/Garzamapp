@@ -1,10 +1,14 @@
 package com.uaeh.garza.garzamapp;
 
 
+import android.Manifest;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Telephony;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,6 +33,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static  final String TAG = "MapsActivity";
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+
+    private static final int ICON_PARADA = R.mipmap.ic_marker_par;
+    private static final int ICON_ESCUELA = R.drawable.icon_par;
+
+    private static final int SMS_PERMISSION_CODE = 12;
+
 
     //Escuchador de mensaje
     SmsReceiver receiver = new SmsReceiver();
@@ -68,6 +79,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMapView.onCreate(mapViewBundle);
 
         mMapView.getMapAsync(this);
+
+
+        if(!isSmsPermissionGranted())
+        {
+            requestReadAndSendSmsPermission();
+        }
 
 
     }
@@ -124,7 +141,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     //evento que se dispara al dar click a un marcador
     @Override
     public boolean onMarkerClick(Marker marker) {
-        tv_info_marker.setText("Ruta: "+ marker.getTitle());
+        tv_info_marker.setText("Nombre de la parada: "+ marker.getTitle());
         return true;
     }
 
@@ -134,56 +151,124 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //ciudad del conocimiento
         map.addMarker(new MarkerOptions().position(new LatLng(20.09309534136533, -98.71148228645326))
                 .title("Ciudad del Conocimiento")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.096445519848682, -98.71409475803377))
                 .title("CEVIDE")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.099160875085076, -98.70805978775026))
                 .title("Segunda Entrada al Fraccionamiento Villas del Álamo")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.097417813869924, -98.7051147222519))
                 .title("AV. Encino y esq. de Av. del Roble")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.096843506214125, -98.70368242263794))
                 .title("Entronque Av. del Encino y de los Avellanos")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.097810759999764, -98.70231449604036))
                 .title("De los Avellanos esq. Calle del Ébano")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.099599156210527, -98.70212674140932))
                 .title("De los Avellanos esq. Calle Lima")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.101070159754418, -98.70157957077026))
             .title("Calle Tamarindo esq. Del Olmo")
-            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+            .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.103714908758747, -98.70448708534242))
                 .title("Av.San Miguel Azoyatla esq. Calle Margarita")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
 
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.10845519467439, -98.71047377586366))
                 .title("CEUNI")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_ESCUELA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.140928083252636, -98.80622863769533))
                 .title("ICEA")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_ESCUELA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.136163598946613, -98.81307363510133))
                 .title("ICSa_2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_ESCUELA)));
 
         map.addMarker(new MarkerOptions().position(new LatLng(20.122362898745056, -98.7967336177826))
                 .title("ICSHu")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_par)));
+                .icon(BitmapDescriptorFactory.fromResource(ICON_ESCUELA)));
+
+        //------------------------------------------
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.102440397197313, -98.76581311225891))
+                .title("CENIHES")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_ESCUELA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.10851060630692, -98.77230405807497))
+                .title("Puente de San Cayetano")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.11094869871367, -98.77496480941774))
+                .title("Gran Foro")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.11223825289111, -98.77438545227052))
+                .title("Aurrera")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.113427051233312, -98.77286195755006))
+                .title("Entrada a Piracantos")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.11391062763547, -98.76968622207643))
+                .title("semaforo palmar")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.114414351464987, -98.76623153686525))
+                .title("esq_av_2_bonfil")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.11464606388193, -98.76271247863771))
+                .title("esquia_bonfil")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.118151931613053, -98.76327037811281))
+                .title("escuela_primaria")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.120106318017793, -98.76332938671113))
+                .title("vias_del_tren")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.124397823085747, -98.76368880271912))
+                .title("Oxxo")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.124669815916977, -98.75696182250978))
+                .title("prepa_3")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.125782966832652, -98.74861478805543))
+                .title("barranca_blanca")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.126422647257336, -98.74508500099184))
+                .title("dos_caminos")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.126261468184374, -98.74053597450258))
+                .title("maria_anaya")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
+        map.addMarker(new MarkerOptions().position(new LatLng(20.124689963515287, -98.73736023902894))
+                .title("Manuel_fernando")
+                .icon(BitmapDescriptorFactory.fromResource(ICON_PARADA)));
+
 
 
 
@@ -569,25 +654,72 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }//acaba loadPolyline
 
 
+    public boolean isSmsPermissionGranted() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestReadAndSendSmsPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_SMS)) {
+            // You may display a non-blocking explanation here, read more in the documentation:
+            // https://developer.android.com/training/permissions/requesting.html
+        }
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case SMS_PERMISSION_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Toast.makeText(this, "Error, necesito los permisos", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+
     public void setBusMarker(String coordenadas,GoogleMap map)
     {
 
-        if(bus_pos != null)
+        try {
+            if(bus_pos != null)
+            {
+                bus_pos.remove();
+            }
+
+            String[] coord_sep = coordenadas.split(",",2);
+            Double lat = Double.valueOf(coord_sep[0]);
+            Double longt = Double.valueOf(coord_sep[1]);
+
+            LatLng pos = new LatLng(lat,longt);
+
+            bus_pos = map.addMarker(new MarkerOptions().position(pos)
+                    .title("Ruta 1")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)));
+
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos,15.0f));
+
+        } catch (ArrayIndexOutOfBoundsException ex)
         {
-            bus_pos.remove();
+            ex.printStackTrace();
+            Log.e(TAG,"Error al obtener coordenadas: " + ex.getMessage());
+        }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+            Log.e(TAG,"Error al obtener coordenadas: " + e.getMessage());
         }
 
-        String[] coord_sep = coordenadas.split(",",2);
-        Double lat = Double.valueOf(coord_sep[0]);
-        Double longt = Double.valueOf(coord_sep[1]);
 
-        LatLng pos = new LatLng(lat,longt);
-
-        bus_pos = map.addMarker(new MarkerOptions().position(pos)
-                .title("Ruta 1")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_icon)));
-
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(pos,15.0f));
 
       /*  map.addMarker(new MarkerOptions().position(pos)
                 .title("Ruta 1")

@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.uaeh.garza.garzamapp.Dialogs.DialogAcercaDe;
 import com.uaeh.garza.garzamapp.Fragments.FlotillasFragment;
 import com.uaeh.garza.garzamapp.Fragments.GarzaMappFragment;
 import com.uaeh.garza.garzamapp.Fragments.ObjetivosFragment;
@@ -78,6 +79,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,8 +94,12 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //mostrar dialog de acerca_de
+        if (id == R.id.action_about) {
+
+            DialogAcercaDe dialog = new DialogAcercaDe();
+            dialog.show(getSupportFragmentManager(),"Acerca_de");
+
             return true;
         }
 
@@ -206,7 +218,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public int getCount() {
             // 4 paginas a mostrar
-            return 4;
+            return 3;
         }
     }
 

@@ -41,6 +41,10 @@
     <string name="str_nav_group_title">Rutas y Horarios</string>
     <string name="title_activity_maps">Navegar</string>
     <string name="str_rutas_title">Transporte Universitario</string>
+    <string name="str_acerca_de">Esperamos que ésta aplicación te sea útil en tu día como universitario en esta Institución</string>
+    <string name="str_acerca_de_2">Aplicación desarrollada por alumnos del Instituto de Ciencias Básicas e Ingenierías</string>
+
+
 
 
 </resources>

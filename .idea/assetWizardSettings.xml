@@ -45,8 +45,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="bbdefb" />
-                                      <entry key="outputName" value="ic_marker_par" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="C:\Users\Marcos Pedraza\Pictures\recursos_app_GarzaMap\AppInventor\assets\icons8_Gmail_48px.png" />
+                                      <entry key="outputName" value="ic_gmail" />
                                     </map>
                                   </option>
                                 </PersistentState>
